@@ -1,0 +1,122 @@
+@startuml
+    package "A" {
+    +class Person{
+        -Name: String
+        -ID: int
+        --
+        +Person()
+        +Person(String name, int ID)
+    }
+    +class User extends Person{
+            -Age: int
+            -Address: String
+            -PhoneNumber: int
+            --
+            +User()
+            +User(String name, int ID, int age, String address, int phoneNumber)
+    }
+
+    +class Manger extends Person{
+        -Password: String;
+        -Salary: double;
+        -Wage: double;
+        -WorkingHours: int;
+        --
+        +Manger()
+        +Manger(String name, int ID, String password, double salary, double wage, int workingHours)
+        --
+        +CheckAvailability (): void
+        +CalculateSalary (): double
+    }
+
+    +class Worker extends Person{
+        -Password: String
+        -Salary: double
+        -ID: int
+        -WorkingHours: int
+        --
+        +Worker()
+        +Worker(String name, int ID, String password, double salary, int ID1, int workingHours)
+    }
+    }
+
+    newpage
+
+    package "B" {
+    +class AudioBook extends BookType{
+        -Narrator: String
+        +AudioBook()
+        +AudioBook(String title, String author, String publisher, double price, String genre, int noOfPages, String narrator)
+    }
+
+    +class Book extends BookType{
+        -CoverType: String
+        +Book()
+        +Book(String title, String author, String publisher, double price, String genre, int noOfPages, String coverType)
+    }
+
+    +class BookType {
+        -Title: String
+        -Author: String
+        -Publisher: String
+        -price: double
+        -Genre: String
+        -NoOfPages: int
+        --
+        +BookType()
+        +BookType(String title, String author, String publisher, double price, String genre, int noOfPages)
+
+    }}
+}
+    newpage
+
+    package "C" {
+    interface PaymentMethod {
+        Pay(double amount): void
+    }
+    +class Cash implements PaymentMethod{
+        public Cash()
+        --
+        +Pay(double amount): void
+    }
+
+    +class CreditCard implements PaymentMethod{
+        -CardNumber: String
+        --
+        +CreditCard()
+        +CreditCard(String cardNumber)
+        +Pay(double amount):void
+    }
+
+
+    newpage
+
+    package "D"{
+    +class ShoppingCart {
+        -BookList: ArrayList<Book>
+        -BookPrice: double
+        -AudioBookList: ArrayList<AudioBook>
+        -AudioBookPrice: double
+        -Total: double
+        --
+        +ShoppingCart()
+        --
+        -addBook (Book): void
+        -removeBook (Book): void
+        -addAudioBook (AudioBook): void
+        -removeAudioBook (AudioBook): void
+        -Checkout (): double
+        -payAmount (PaymentMethod): void
+    }
+    }
+
+    newpage
+
+    package "E"{
+    abstract class PromoCode {
+        -PromoCodes: Map<String, Integer>
+        -AddCode(String code, int percentage): void
+        -GetCode(String code): boolean
+    }
+    }
+@enduml
